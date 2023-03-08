@@ -3,8 +3,9 @@
 The Wireless Broadband Alliance's vendor ID 14122 defines the following RADIUS Vendor Specific Attributes (VSAs) to be used in RADIUS signalling for Wi-Fi authentication, authorization and accounting.
 
 ---
+<br/>
 
-# CURRENT WBA Vendor Specific Attributes
+# "WBA-" Vendor Specific Attributes
 
 
 ## WBA-Offered-Service
@@ -17,7 +18,7 @@ The Wireless Broadband Alliance's vendor ID 14122 defines the following RADIUS V
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    Vendor-ID = 14122 (cont)     |  sub-type (12)|   Sub-Length  | 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                       WBA-Offered-Service
+|                       Offered-Service
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~
 
@@ -41,7 +42,7 @@ Sub-length
 
  - Length of the sub-attribute including the sub-type and sub-length fields
 
-WBA-Offered-Service
+Offered-Service
 
  - A UTF-8 encoded text string that signals the service offered by the Access Network provider.
 
@@ -62,7 +63,7 @@ An IDP that authorizes their user to receive a particular service tier shall cop
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    Vendor-ID = 14122 (cont)     |  sub-type (13)|   Sub-Length  | 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                 WBA-Financial-Clearing-Provider
+|                 Financial-Clearing-Provider
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~
 
@@ -86,9 +87,9 @@ Sub-length
 
  - Length of the sub-attribute including the sub-type and sub-length fields
 
-WBA-Financial-Clearing-Provider
+Financial-Clearing-Provider
 
- - A UTF-8 encoded string encoding the identity of the provider of financial clearing services. The first character of the WBA-Financial-Clearing-Provider string is used to encode a namespace identifier. A single namespace identifier is defined for use in the Financial-Clearing-Provider VSA:
+ - A UTF-8 encoded string encoding the identity of the provider of financial clearing services. The first character of the Financial-Clearing-Provider string is used to encode a namespace identifier. A single namespace identifier is defined for use in the Financial-Clearing-Provider VSA:
     - “4”  (0x34)	: 	WBAID - This identifier is used to indicate that the remaining characters of the string are used to indicate a WBAID.
 
 **It is mandatory for the WBA-Financial-Clearing-Provider attribute to be signalled towards a IDP when the ANP supports the OpenRoaming Settled Service.**
@@ -105,7 +106,7 @@ WBA-Financial-Clearing-Provider
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    Vendor-ID = 14122 (cont)     |  sub-type (14)|   Sub-Length  | 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                   WBA-Data-Clearing-Provider
+|                   Data-Clearing-Provider
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~
 
@@ -129,9 +130,9 @@ Sub-length
 
  - Length of the sub-attribute including the sub-type and sub-length fields
 
-WBA-Data-Clearing-Provider
+Data-Clearing-Provider
 
- - A UTF-8 encoded string encoding the identity of the provider of data clearing services. The first character of the WBA-Data-Clearing-Provider string is used to encode a namespace identifier. A single namespace identifier is defined for use in the Financial-Clearing-Provider VSA:
+ - A UTF-8 encoded string encoding the identity of the provider of data clearing services. The first character of the Data-Clearing-Provider string is used to encode a namespace identifier. A single namespace identifier is defined for use in the Financial-Clearing-Provider VSA:
     - “4”  (0x34)	: 	WBAID - This identifier is used to indicate that the remaining characters of the string are used to indicate a WBAID.
 
 When a receiving entity receives a message with a WBA-Financial-Clearing-Provider attribute and no WBA-Data-Clearing-Provider attribute, it can assume that the organization responsible for providing data clearing service to the sending entity is identical to the organization providing financial clearing service to the sending entity. 
@@ -214,7 +215,7 @@ The WBA-Identity-Provider VSA is used to signal a string encoding the identity o
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    Vendor-ID = 14122 (cont)     |  sub-type (16)|   Sub-Length  | 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                      WBA-Identity-Provider
+|                      Identity-Provider
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~
 
@@ -238,16 +239,44 @@ Sub-length
 
  - Length of the sub-attribute including the sub-type and sub-length fields
 
-WBA-Identity-Provider
+Identity-Provider
 
- - A text string encoding string encoding the identity of the IDP. The first character of the WBA-Identity-Provider string is used to encode a namespace identifier. Two namespace identifiers are defined for use in the Identity-Provider VSA:
+ - A text string encoding string encoding the identity of the IDP. The first character of the Identity-Provider string is used to encode a namespace identifier. Two namespace identifiers are defined for use in the Identity-Provider VSA:
     - “0”  (0x30)	: 	TADIG code - This identifier is used to indicate that the remaining characters of the string are used to indicate a Transferred Account Data Interchange Group (TADIG) codes, as defined by GSMA.
     - “4”  (0x34)	: 	WBAID - This identifier is used to indicate that the remaining characters of the string are used to indicate a WBAID.
 
-
 ---
 
-# LEGACY WISPr Vendor Specific Attributes
+# Table of WBA Vendor Specific Attributes 
+
+The following table provides a guide to which of the Vendor Specific Attributes defined
+may be found in which kinds of packets, and in what quantity.
+
+| Request | Accept | Reject | Challenge| Acct-Request| Vendor Sub-Type  | Attribute |
+| ---- | ---- | ---- | ---- | ---- | ----  | ---- |
+| 0-1   | 0     | 0    | 0 | 0-1  | 12 | WBA-Offered-Service|
+| 0-1   | 0-1     | 0    | 0 | 0-1  | 13 | WBA-Financial-Clearing-Provider|
+| 0-1   | 0-1     | 0    | 0 | 0-1  | 14 | WBA-Data-Clearing-Provider|
+| 0+   | 0-1     | 0    | 0 | 0-1  | 15 | WBA-Linear-Volume-Rate|
+| 0   | 0-1     | 0    | 0 | 0  | 16 | WBA-Identity-Provider|
+
+
+The following table defines the meaning of the above table entries.
+
+| Entry | Meaning |
+| ---- | ---- |
+|0    | This attribute MUST NOT be present in packet.|
+|0+   | Zero or more instances of this attribute MAY be present in packet.|
+|0-1   |Zero or one instance of this attribute MAY be present in packet.|
+|1    | One instance of this attribute MUST be present in packet.|
+
+
+---
+<br/><br/><br/>
+
+# LEGACY "WISPr-" Vendor Specific Attributes
+
+The Wireless Broadband Alliance's vendor ID 14122 was previously used to define the following RADIUS Vendor Specific Attributes (VSAs) to be used in legacy Wireless Internet Service Provider Roamining (WISPr) deployments. 
 
 ## WISPr-Location-ID
 
@@ -718,3 +747,32 @@ WISPr-Billing-Class-Of-Service
  
 **This attribute is deprecated for use in Passpoint networks.**
 
+
+# Table of WISPr Vendor Specific Attributes 
+
+The following table provides a guide to which of the Vendor Specific Attributes defined
+may be found in which kinds of packets, and in what quantity.
+
+| Request | Accept | Reject | Challenge| Acct-Request| Vendor Sub-Type  | Attribute |
+| ---- | ---- | ---- | ---- | ---- | ----  | ---- |
+| 0-1   | 0     | 0    | 0 | 0-1  | 1 | WISPr-Location-ID |
+| 0-1   | 0     | 0    | 0 | 0-1  | 2 | WISPr-Location-Name|
+| 0-1   | 0     | 0    | 0 | 0  | 3 | WISPr-Logoff-URL |
+| 0   | 0-1     | 0    | 0 | 0  | 4 | WISPr-Redirection-URL|
+| 0-1   | 0     | 0    | 0 | 0-1  | 5 | WISPr-Bandwidth-Min-Up|
+| 0-1   | 0     | 0    | 0 | 0-1  | 6 | WISPr-Bandwidth-Min-Down|
+| 0-1   | 0     | 0    | 0 | 0-1  | 7 | WISPr-Bandwidth-Max-Up|
+| 0-1   | 0    | 0    | 0 | 0-1  | 8 | WISPr-Bandwidth-Max-Down|
+| 0   | 0-1     | 0    | 0 | 0  | 9 | WISPr-Session-Terminate-Time|
+| 0   | 0-1     | 0    | 0 | 0  | 10 | WISPr-Session-Terminate-End-Of-Day|
+| 0   | 0-1     | 0    | 0 | 0  | 11 | WISPr-Billing-Class-Of-Service|
+
+
+The following table defines the meaning of the above table entries.
+
+| Entry | Meaning |
+| ---- | ---- |
+|0    | This attribute MUST NOT be present in packet.|
+|0+   | Zero or more instances of this attribute MAY be present in packet.|
+|0-1   |Zero or one instance of this attribute MAY be present in packet.|
+|1    | One instance of this attribute MUST be present in packet.|
