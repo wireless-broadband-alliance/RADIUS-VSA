@@ -245,6 +245,54 @@ Identity-Provider
     - “0”  (0x30)	: 	TADIG code - This identifier is used to indicate that the remaining characters of the string are used to indicate a Transferred Account Data Interchange Group (TADIG) codes, as defined by GSMA.
     - “4”  (0x34)	: 	WBAID - This identifier is used to indicate that the remaining characters of the string are used to indicate a WBAID.
 
+
+## WBA-Custom-SLA
+
+The WBA-Custom-SLA VSA is used by ANPs that operate OpenRoaming installations on moving platforms 
+to signal one or more service availability/bandwidth tuples that is/are supported by the 
+ANP's installation.
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (17)|   Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Availability  |                   Bandwidth                   | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields.
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122.
+
+Sub-Type
+
+ - Attribute sub-type of 17.
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields.
+
+Availability
+
+ - An 8-bit unsigned integer representing the percentage of time when the per-user-sustained-bandwidth is available.
+ 
+Bandwidth
+
+ - A 24-bit unsigned integer representing the per-user-sustained bandwidth in bits per second.
+
+
 ---
 
 # Table of WBA Vendor Specific Attributes 
@@ -259,6 +307,7 @@ may be found in which kinds of packets, and in what quantity.
 | 0-1   | 0-1     | 0    | 0 | 0-1  | 14 | WBA-Data-Clearing-Provider|
 | 0+   | 0-1     | 0    | 0 | 0-1  | 15 | WBA-Linear-Volume-Rate|
 | 0   | 0-1     | 0    | 0 | 0  | 16 | WBA-Identity-Provider|
+| 0+   | 0     | 0    | 0 | 0  | 16 | WBA-Custom-SLA|
 
 
 The following table defines the meaning of the above table entries.
@@ -269,6 +318,37 @@ The following table defines the meaning of the above table entries.
 |0+   | Zero or more instances of this attribute MAY be present in packet.|
 |0-1   |Zero or one instance of this attribute MAY be present in packet.|
 |1    | One instance of this attribute MUST be present in packet.|
+
+# Enhanced Reply-Message Syntax
+
+Originally defined for being able to signal a displayable text string to authenticating users, the reply-message attribute is re-used in deployments supporting WRIX-based Passpoint networks to signal additional information from the IDP to the ANP. The enhanced reply message is encoded using UTF-8 characters. The WBA defined additional information is appended after the NUL ASCII character (0x00). 
+
+The ABNF syntax of the Reply-message is:
+
+~~~~~~~~~~
+Reply-message      = [ displayable-string ] %x00 [ wba-info ]
+displayable-string = *CHAR 
+wba-info           = ”Reject-Reason=" cause-code
+
+cause-code =  “10” ; failed user authentication
+cause-code =/ “11” ; invalid user identity
+cause-code =/ “12” ; expired client certificate
+cause-code =/ “20” ; generic AAA failure 
+cause-code =/ “21” ; backend failure
+cause-code =/ “22” ; protocol timeout
+cause-code =/ “30” ; failure due to badly formatted request
+cause-code =/ “31” ; rejected – missing charging model
+cause-code =/ “32” ; rejected – missing geospatial location
+cause-code =/ “40” ; failure due to subscription - permanent
+cause-code =/ “41” ; authorization rejected - no service subscription
+cause-code =/ “42” ; authorization rejected - roaming not allowed in this network
+cause-code =/ “43” ; authorization rejected - offered charging model not acceptable 
+cause-code =/ “44” ; authorization rejected - roaming to this location not allowed
+cause-code =/ “45” ; authorization rejected – offered service level not acceptable
+cause-code =/ “50” ; failure due to subscription - temporary
+cause-code =/ “51” ; authorization rejected - offered charging model not acceptable at this time
+cause-code =/ “52” ; authorization rejected - roaming to this location not allowed at this time
+~~~~~~~~~~
 
 
 ---
