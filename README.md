@@ -292,6 +292,319 @@ Bandwidth
 
  - A 24-bit unsigned integer representing the per-user-sustained bandwidth in bits per second.
 
+## WBA-WAN-RTT
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (100)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          WBA-WAN-RTT
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 100
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+WAN-RTT
+
+ - An 8-bit unsigned integer representing round-trip time in milliseconds from the access
+   network to the Internet. 
+   
+Typically measured using a well-known anycast IP address that automatically routes to the  closest data center.
+
+## WBA-Chan-Util
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (101)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                          WBA-Chan-Util
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 101
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+Chan-Util
+
+ - An 8-bit unsigned integer in the range [0 - 100] representing the percentage of time the access point considers the channel busy due to traffic. 
+   
+This value captures all channel busy time whether the AP is transmitting, an associated STA is transmitting, or the time any other device transmission blocks the CCA process of the AP. 
+
+## WBA-Chan-Util-lin-avg
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (102)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      WBA-Chan-Util-lin-avg
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 102
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+Chan-Util-lin-avg
+
+ - An 8-bit unsigned integer representing the duration in seconds over which the linear averaging of channel utilization is performed.
+ 
+ A RADIUS message that includes the WBA-Chan-Util-lin-avg attribute MUST NOT include the WBA-Chan-Util-exp-avg attribute sub-type 103. 
+
+ ## WBA-Chan-Util-exp-avg
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (103)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      WBA-Chan-Util-exp-avg
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 103
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+Chan-Util-exp-avg
+
+ - An 8-bit unsigned integer representing the weight of the exponential moving average, where the exponential weight is 2^unsigned integer.
+ 
+ A RADIUS message that includes the WBA-Chan-Util-lin-avg attribute MUST NOT include the WBA-Chan-Util-lin-avg attribute sub-type 102. 
+
+## WBA-Noise-Floor
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (104)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      WBA-Noise-Floor
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 104
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+Noise-Floor
+
+ - A signed integer representing the current noise measured in dBm. 
+ 
+## WBA-Min-RSSI
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (105)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      WBA-Min-RSSI
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 105
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+Min-RSSI
+
+ - A signed integer repesenting the configured minimum RSSI level (in dBm) for a device to associate/authenticate to the AP. 
+
+ ## WBA-Wi-Fi-Global-OC
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (106)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      WBA-Wi-Fi-Global-OC
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 106
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+Wi-Fi-Global-OC
+
+ - An unsigned integer representing Wi-Fi Global Operating Class as defined in [IEEE80211] Annex E 
+
+ ## WBA-STA-Count
+
+~~~~~~~~~~
+0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  Length       |        Vendor-ID = 14122   
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Vendor-ID = 14122 (cont)     |  sub-type (107)|  Sub-Length  | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      WBA-STA-Count
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~
+
+Type
+
+ - 26 for Vendor-Specific
+
+Length
+
+ - Length of entire attribute including type and length fields
+
+Vendor-ID
+
+ - 4 octets encoding the WBA Vendor ID of 14122
+
+Sub-Type
+
+ - Attribute sub-type of 107
+
+Sub-length
+
+ - Length of the sub-attribute including the sub-type and sub-length fields
+
+STA-Count
+
+ - An unsigned integer representing the number of Wi-Fi Stations associated with the WLAN
+   Radio
 
 ---
 
@@ -308,7 +621,14 @@ may be found in which kinds of packets, and in what quantity.
 | 0+   | 0-1     | 0    | 0 | 0-1  | 15 | WBA-Linear-Volume-Rate|
 | 0   | 0-1     | 0    | 0 | 0  | 16 | WBA-Identity-Provider|
 | 0+   | 0     | 0    | 0 | 0  | 16 | WBA-Custom-SLA|
-
+| 0-1   | 0     | 0    | 0 | 0-1  | 100 | WBA-WAN-RTT|
+| 0-1   | 0     | 0    | 0 | 0-1  | 101 | WBA-Chan-Util| 
+| 0-1   | 0     | 0    | 0 | 0-1  | 102 | WBA-Chan-Util-lin-avg|
+| 0-1   | 0     | 0    | 0 | 0-1  | 103 | WBA-Chan-Util-exp-avg|
+| 0-1   | 0     | 0    | 0 | 0-1  | 104 | WBA-Noise-Floor|
+| 0-1   | 0     | 0    | 0 | 0-1  | 105 | WBA-Min-Rssi|
+| 0-1   | 0     | 0    | 0 | 0-1  | 106 | WBA-Wi-Fi-Global-OC|
+| 0-1   | 0     | 0    | 0 | 0-1  | 107 | WBA-STA-Count|
 
 The following table defines the meaning of the above table entries.
 
