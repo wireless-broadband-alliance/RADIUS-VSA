@@ -307,7 +307,7 @@ may be found in which kinds of packets, and in what quantity.
 | 0-1   | 0-1     | 0    | 0 | 0-1  | 14 | WBA-Data-Clearing-Provider|
 | 0+   | 0-1     | 0    | 0 | 0-1  | 15 | WBA-Linear-Volume-Rate|
 | 0   | 0-1     | 0    | 0 | 0  | 16 | WBA-Identity-Provider|
-| 0+   | 0     | 0    | 0 | 0  | 16 | WBA-Custom-SLA|
+| 0+   | 0     | 0    | 0 | 0  | 17 | WBA-Custom-SLA|
 
 
 The following table defines the meaning of the above table entries.
