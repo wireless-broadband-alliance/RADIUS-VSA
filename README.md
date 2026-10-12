@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/87d649cb-5157-475c-b8e1-422ff55022f9)![image](https://github.com/user-attachments/assets/90c6e3a4-6a32-4589-b8c7-7234afd24e00)# Wireless Broadband Alliance Defined Vendor Specific Attributes
+# Wireless Broadband Alliance Defined Vendor Specific Attributes
 
 The Wireless Broadband Alliance's vendor ID 14122 defines the following RADIUS Vendor Specific Attributes (VSAs) to be used in RADIUS signalling for Wi-Fi authentication, authorization and accounting.
 
